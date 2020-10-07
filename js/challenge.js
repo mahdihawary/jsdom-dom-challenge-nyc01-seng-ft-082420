@@ -33,14 +33,11 @@ function toggleResume() {
     intervalId = setInterval(incrementLikes, 1000)
 }
 
-
-
-
-
 document.addEventListener('click',function(e){
     const button = e.target
     const counter = document.querySelector("#counter")
-    const heart = document.querySelector('.likes')
+    const likesUl = document.querySelector('.likes')
+    console.log(likesUl)
     
     if (button.matches("#plus")){
         const likes = parseInt(counter.innerText, 10) + 1
@@ -57,37 +54,35 @@ document.addEventListener('click',function(e){
         }
         
 
-    }
     if (button.matches("#minus")) {
         
         const likes = parseInt(counter.innerText, 10) - 1
         counter.innerText = `${likes}`
+        
 
     }
     if (button.matches('#heart')) {
         console.log(e)
-        const counter = document.querySelector('#counter')
-        const like = document.createElement("li")
-        const likeCounter = 0
+        const likeNum = parseInt(counter.innerText, 10)
 
-        if (like.dataset.num === parseInt(counter.innerText, 10)){
-            likeCounter++
-        }
-
-        heart.append(like)
-        
-        like.dataset.num = parseInt(counter.innerText, 10)
-        const word = "time"
-
-        if (likeCounter>1){
-            word = "times"
-        }
-        
-        like.innerHTML = `${like.dataset.num}  has been liked <span>1</span> ${word}
+        if (likesUl.querySelector(`[data-number="${likeNum}"]`)){
+            const like = likesUl.querySelector(`[data-number="${likeNum}"]`)
+            like.dataset.likes++
+            like.innerHTML = `${like.dataset.num}  has been liked <span>${like.dataset.likes}</span> times
         `
+        }
+    else{
+        const like = document.createElement("li")
+            
+            like.dataset.number = likeNum
+            like.dataset.likes = 1
+        
+        likesUl.append(like)
+            like.dataset.num = parseInt(counter.innerText, 10)
+            like.innerHTML = `${like.dataset.num}  has been liked <span>${like.dataset.likes}</span> time
+        `
+        }
     }
-
-   
 })
 
 document.addEventListener('submit', function (e) {
