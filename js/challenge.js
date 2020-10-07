@@ -33,6 +33,10 @@ function toggleResume() {
     intervalId = setInterval(incrementLikes, 1000)
 }
 
+
+
+
+
 document.addEventListener('click',function(e){
     const button = e.target
     const counter = document.querySelector("#counter")
@@ -53,6 +57,8 @@ document.addEventListener('click',function(e){
         
         }
         
+
+    }
 
     if (button.matches("#minus")) {
         
@@ -81,8 +87,12 @@ document.addEventListener('click',function(e){
             like.dataset.num = parseInt(counter.innerText, 10)
             like.innerHTML = `${like.dataset.num}  has been liked <span>${like.dataset.likes}</span> time
         `
+
         }
+        
     }
+
+   
 })
 
 document.addEventListener('submit', function (e) {
